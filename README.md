@@ -6,7 +6,6 @@
   <img width="1691" height="680" alt="thumbnail" src="https://github.com/user-attachments/assets/8590f550-622a-4074-89bf-ae2581ebbee9" />
 </a>
 
-
 ## Genel Bakış
 
 **Petfinder**, kaybolan hayvanları sahipleriyle yeniden buluşturmak için toplulukları bir araya getiren, uçtan uca bir web uygulamasıdır. Laravel deneyimi 4 ay, toplam kodlama deneyimi ise bir yıldan az olan bir geliştirici tarafından tek başına **toplam 6 haftada** geliştirilmiştir.
@@ -52,7 +51,6 @@ Reddit’in yapısını andıran, iş parçacıklı bir yorum bölümü. Yorumla
 
 **Bu Tercihin Nedeni:** Özyinelemeli bir yorum sistemi oluşturmak basit değildir. Geliştiricilerin çoğu ilk büyük projelerinde bu tür bir sistemden kaçınır. Bu yaklaşım, veritabanı tasarımı konusundaki düşünme becerisini ve kullanıcı deneyiminin dikkate alındığını gösterir.
 
----
 
 ### 2. **Soft Delete Mimarisi ve Observer Deseni**
 
@@ -106,7 +104,6 @@ Veritabanı yabancı anahtarındaki `onDelete('cascade')`, Laravel observer’la
 
 Observer ayrıca **Typesense indekslemesinin güncel kalmasını** sağlar. Gönderiler controller üzerinden silindiğinde observer arama indeksinin güncellenmesini tetikler ve sahipsiz kayıtların oluşmasını önler.
 
----
 
 ### 3. **Typesense ve Docker ile Tam Metin Arama**
 
@@ -122,8 +119,6 @@ hayvanın cinsiyeti, hayvan türünün adı, hayvan ırkının adı, durum, hayv
 
 
 **Bu Tercihin Nedeni:** Typesense ve Docker, bir öğrenci projesi için kurumsal düzeyde altyapıdır. Geliştiricilerin çoğu basit MySQL LIKE sorgularını tercih eder.
-
----
 
 ### 4. **Redis Önbellekleme ve Observer Otomasyonu**
 
@@ -181,8 +176,6 @@ Yorumlar önbelleğe alınır ve CRUD işlemlerinden sonra önbellek otomatik ol
 
 Bu sayede her sayfa yüklemesinde yorum ağaçlarının yeniden hesaplanması önlenir; bu, sık karşılaşılan bir performans darboğazıdır.
 
----
-
 ### 5. **Veritabanı İşlemleriyle Toplu İşlemler**
 
 <img width="1403" height="656" alt="Bulk_operations_in_action-optimize" src="https://github.com/user-attachments/assets/a221c3fb-aba3-457c-a185-6ca10fa40745" />
@@ -227,8 +220,6 @@ public function bulkRestore(Request $request)
 ```
 
 **Bu Tercihin Nedeni:** Toplu işlemler, dikkatli işlem yönetimi ve önbellek geçersizleştirme gerektirir. Bunları doğru yapmak veri tutarsızlıklarını önler.
-
----
 
 ### 6. **Testler ve Factory’ler**
 
@@ -323,7 +314,6 @@ Testler kimlik doğrulamayı, soft delete işlemlerini, toplu işlemleri ve aram
     }
 ```
 
-
 **Rastgeleleştirme içeren Factory (+Seed işlemi):**
 
 <img width="1265" height="554" alt="Running_db_seed_operation" src="https://github.com/user-attachments/assets/82752158-955d-4117-a0b4-20ca78c8abdc" /><br>
@@ -357,9 +347,6 @@ Bu, hızlı test ve demo verisi üretimi sağlar.
                 $this->createNestedComments($comment, $post);
             }
         }
-
-        // $randomReplyDepth = rand(0, 4);
-
     }
 
     private function createNestedComments(Comment $parentComment, AnimalPost $post, $depth = 0, $maxDepth = 5)
@@ -470,8 +457,6 @@ Database foreign key `onDelete('set null')` Laravel observers'dan *önce* çalı
 
 Olay sırası önemlidir. Database kısıtlamaları ve uygulama mantığı çatışabilir. İşlemlerin yaşam döngüsünü anlamak (deleting vs. deleted, creating vs. created) doğru davranış için kritiktir.
 
----
-
 ## Teknoloji Yığını
 
 | Katman | Teknoloji | Neden |
@@ -483,8 +468,6 @@ Olay sırası önemlidir. Database kısıtlamaları ve uygulama mantığı çat�
 | **Caching** | Redis + Docker | Tag aracılığıyla hızlı cache geçersiz kılma |
 | **Testing** | Laravel Tests (PHPUnit) | Kritik yollar için kapsam |
 | **Containerization** | Docker | Tutarlı yerel ortamlar |
-
----
 
 ## Mobil UI
 
@@ -509,8 +492,6 @@ Uygulama tamamen responsive'dir, etkileşimler ve küçük ekranlar için optimi
 - Mobil kısıtlamaları için optimize edilmiş arama filtreleri
 - Görüntü optimizasyonuyla hızlı yükleme
 
----
-
 ## Temel Öğrenme Çıktıları
 
 **İlk Kez Yapılan Uygulamalar:**
@@ -529,8 +510,6 @@ Uygulama tamamen responsive'dir, etkileşimler ve küçük ekranlar için optimi
 **Başlangıçtaki Deneyim Seviyesi:** 4 ay Laravel, toplam 1 yıldan az kodlama  
 **Sonuç:** Şablonlardan sıfır kod yeniden kullanımıyla production-grade mimari
 
----
-
 ## Bu Proje Benim Kariyer İçin Neden Önemli
 
 Bu proje şunları gösterir:
@@ -541,8 +520,6 @@ Bu proje şunları gösterir:
 4. **Problem Çözme:** İnce ısmarlı race conditions ve mimari uyuşmazlıklar bağımsız olarak debuglandı
 5. **Kod Kalitesi:** Kapsamlı testler, factories ve migrations, hack proje değil
 6. **Solo İcra:** Her özellik rehberlik olmadan oluşturuldu, test edildi ve debuglandı
-
----
 
 ## Sonrasında Ne Var
 
